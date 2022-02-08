@@ -31,11 +31,6 @@ div
   background-color: var(--primary);
 }
 
-.tamagotchi__display
-{
-  border: 5px solid var(--accents);
-}
-
 .display__pet
 {
   height: 300px;
@@ -57,15 +52,16 @@ div
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  align-items: stretch;
+  /* align-items: center; */
   background-color: var(--screen);
-  
 }
 
 .buttons
 {
+  width: 300px;
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .button
