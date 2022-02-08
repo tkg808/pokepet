@@ -2,3 +2,30 @@
 {
   box-sizing: border-box;
 }
+
+:root
+{
+  --primary: #023E8A;
+  --secondary: #663399;
+  --accents: #00B4D8;
+}
+
+div
+{
+  max-height: 600px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary);
+}
+
+.tomagotchi__display
+{
+  border: 4px solid var(--accents);
+}
+
+.buttons
+{
+  display: flex;
+  background-color: var(--accents);
+}
