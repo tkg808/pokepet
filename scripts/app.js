@@ -85,3 +85,21 @@ const pets =
     },
   ];
 
+/* === DOM Elements === */
+
+const $image = $(".pet__image");
+const $feed = $(".interact__feed");
+const $sleep = $(".interact__sleep");
+const $play = $(".interact__play");
+
+/* === Functions === */
+
+
+
+/* === Event Functions === */
+
+/* === Event Listeners === */
+
+
+
+/* === Invoked Functions === */
