@@ -102,7 +102,7 @@ let currentPet =
 
 let isAlive = true;
 
-// const intervalID = setInterval(agePet, 1000);
+let intervalId;
 
 /* === DOM Elements === */
 
@@ -118,7 +118,16 @@ $image.attr("src", logo);
 
 function agePet()
 {
-  currentPet.age += 1;
+  if (currentPet.age === 10)
+  {
+    clearInterval(intervalId);
+
+    intervalId = null;
+  }
+  else
+  {
+    currentPet.age += 1;
+  }
 
   $(".info__age").text(`Age: ${currentPet.age}`);
 }
@@ -135,10 +144,12 @@ const checkState = function ()
     $(".stat__hungry").text(currentPet.hungry);
     $(".stat__sleepy").text(currentPet.sleepy);
     $(".stat__bored").text(currentPet.bored);
+
   }
   else
   {
     $image.attr("src", logo);
+
   }
 }
 
@@ -193,9 +204,19 @@ const playPet = function ()
   $(".stat__bored").text(currentPet.bored);
 }
 
+const ageInterval = function ()
+{
+  if (!intervalId)
+  {
+    intervalId = setInterval(agePet, 1000);
+  }
+}
+
 /* === Event Listeners === */
 
-$pause.on("click", checkState)
+$pause.on("click", checkState);
+
+$pause.on("click", ageInterval);
 
 $feed.on("click", feedPet);
 
@@ -205,4 +226,9 @@ $play.on("click", playPet);
 
 /* === Invoked Functions === */
 
-console.log($image.attr("src") === "");
+if (age === 10)
+{
+  clearInterval(intervalId);
+
+  intervalId = null;
+}
