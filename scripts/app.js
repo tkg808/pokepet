@@ -134,7 +134,7 @@ const ageInterval = function ()
 {
   if (!intervalId)
   {
-    intervalId = setInterval(increaseAge, 1000);
+    intervalId = setInterval(increaseAge, 2000);
   }
 }
 
@@ -158,13 +158,23 @@ const increaseStats = function ()
 
 const evolvePet = function ()
 {
-  if (currentPet.age >= 10)
+  if (currentPet.age >= 20)
   {
     currentPet.image = pets[index + 2].image;
+
+    if (currentPet.name === pets[index + 1].name)
+    {
+      currentPet.name = pets[index + 2].name;
+    }
   }
-  else if (currentPet.age >= 5)
+  else if (currentPet.age >= 10)
   {
     currentPet.image = pets[index + 1].image;
+
+    if (currentPet.name === pets[index].name)
+    {
+      currentPet.name = pets[index + 1].name;
+    }
   }
 }
 
@@ -210,8 +220,6 @@ const increaseAge = function ()
 
     updateDisplay();
   }
-
-
 }
 
 const generateNewPet = function ()
