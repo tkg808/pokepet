@@ -65,6 +65,14 @@ img
   background-color: var(--screen);
 }
 
+.buttons
+{
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .buttons__interact
 {
   width: 300px;
@@ -80,17 +88,10 @@ img
   background-color: var(--secondary);
 }
 
-.buttons__other
-{
-  width: 300px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.buttons__other button
+.button__other
 {
   padding: 15px 30px;
+  align-self: center;
   border-radius: 100%;
   background-color: var(--secondary)
 }
