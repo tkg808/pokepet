@@ -110,9 +110,9 @@ const $image = $(".pet__image");
 const $feed = $(".interact__feed");
 const $sleep = $(".interact__sleep");
 const $play = $(".interact__play");
-const $pause = $(".button__pause");
+const $active = $(".button__active");
 
-$image.attr("src", logo);
+
 
 /* === Functions === */
 
@@ -144,12 +144,10 @@ const checkState = function ()
     $(".stat__hungry").text(currentPet.hungry);
     $(".stat__sleepy").text(currentPet.sleepy);
     $(".stat__bored").text(currentPet.bored);
-
   }
   else
   {
     $image.attr("src", logo);
-
   }
 }
 
@@ -214,9 +212,9 @@ const ageInterval = function ()
 
 /* === Event Listeners === */
 
-$pause.on("click", checkState);
+$active.on("click", checkState);
 
-$pause.on("click", ageInterval);
+$active.on("click", ageInterval);
 
 $feed.on("click", feedPet);
 
@@ -226,9 +224,4 @@ $play.on("click", playPet);
 
 /* === Invoked Functions === */
 
-if (age === 10)
-{
-  clearInterval(intervalId);
-
-  intervalId = null;
-}
+$image.attr("src", logo);
