@@ -92,6 +92,8 @@ let currentPet =
   image: ""
 };
 
+let index = Math.floor(Math.random() * 3) * 3;
+
 let isAlive = false;
 
 let intervalId;
@@ -138,19 +140,31 @@ const ageInterval = function ()
 
 const increaseStats = function ()
 {
-  if (Math.random() < 0.7)
+  if (Math.random() < 0.5)
   {
     currentPet.hungry += 1;
   }
 
-  if (Math.random() < 0.7)
+  if (Math.random() < 0.5)
   {
     currentPet.sleepy += 1;
   }
 
-  if (Math.random() < 0.7)
+  if (Math.random() < 0.5)
   {
     currentPet.bored += 1;
+  }
+}
+
+const evolvePet = function ()
+{
+  if (currentPet.age >= 10)
+  {
+    currentPet.image = pets[index + 2].image;
+  }
+  else if (currentPet.age >= 5)
+  {
+    currentPet.image = pets[index + 1].image;
   }
 }
 
@@ -158,7 +172,7 @@ const buryPet = function ()
 {
   $image.attr("src", grave);
 
-  if (currentPet.age === 15)
+  if (currentPet.age === 30)
   {
     alert(`${currentPet.name} lived a happy life and died of old age`);
   }
@@ -178,7 +192,7 @@ const buryPet = function ()
 
 const increaseAge = function ()
 {
-  if (currentPet.age === 15 ||
+  if (currentPet.age === 30 ||
     currentPet.hungry === 10 || currentPet.sleepy === 10 || currentPet.bored === 10)
   {
     clearInterval(intervalId);
@@ -190,17 +204,19 @@ const increaseAge = function ()
   else
   {
     currentPet.age += 1;
+
     increaseStats();
+    evolvePet();
 
     updateDisplay();
   }
 
-  // updateDisplay();
+
 }
 
 const generateNewPet = function ()
 {
-  const index = Math.floor(Math.random() * 3) * 3;
+  // const index = Math.floor(Math.random() * 3) * 3;
   currentPet = pets[index];
 
   // let user see their pet before deciding to name it
@@ -244,7 +260,7 @@ const feedPet = function ()
     }
   }
 
-  $hungryDisplay.text(currentPet.hungry)
+  updateDisplay();
 }
 
 const sleepPet = function ()
@@ -261,7 +277,7 @@ const sleepPet = function ()
     }
   }
 
-  $sleepyDisplay.text(currentPet.sleepy);
+  updateDisplay();
 }
 
 const playPet = function ()
@@ -278,10 +294,8 @@ const playPet = function ()
     }
   }
 
-  $boredDisplay.text(currentPet.bored);
+  updateDisplay();
 }
-
-
 
 /* === Event Listeners === */
 
