@@ -97,7 +97,17 @@ let intervalId;
 
 /* === DOM Elements === */
 
+// pet info displays
 const $image = $(".pet__image");
+const $nameDisplay = $(".info__name");
+const $ageDisplay = $(".info__age");
+
+// stat displays
+const $hungryDisplay = $(".stat__hungry");
+const $sleepyDisplay = $(".stat__sleepy");
+const $boredDisplay = $(".stat__bored");
+
+// buttons
 const $feed = $(".interact__feed");
 const $sleep = $(".interact__sleep");
 const $play = $(".interact__play");
@@ -123,7 +133,7 @@ function agePet()
 
 function updatePet()
 {
-  ageInterval;
+  ageInterval();
 
   $image.attr("src", currentPet.image);
   $(".info__name").text(`Name: ${currentPet.name}`);
@@ -137,6 +147,9 @@ function generateNewPet()
 {
   const index = Math.floor(Math.random() * 3) * 3;
   currentPet = pets[index];
+  $image.attr("src", currentPet.image);
+  setTimeout(() => (prompt("What would like to name your new pet?", currentPet.name)), 500);
+
   updatePet();
 }
 
@@ -155,8 +168,6 @@ const checkPet = function ()
   {
     updatePet();
   }
-
-
 }
 
 const feedPet = function ()
