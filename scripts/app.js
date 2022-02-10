@@ -1,14 +1,9 @@
 /* === Variables === */
 
-const logo = "http://4.bp.blogspot.com/-oH465XaJjpY/T8yZVJsteTI/AAAAAAAAADs/LwFrlgaVVv0/s1600/dog_paw_print_black.png"
-
-const egg = "https://www.pinclipart.com/picdir/big/89-892298_pokemon-egg-pokemon-go-egg-png-clipart.png"
-
 const pets =
   [
     {
       name: "Bulbasaur",
-      pokedex: 1,
       age: 1,
       hungry: 1,
       sleepy: 1,
@@ -17,7 +12,6 @@ const pets =
     },
     {
       name: "Ivysaur",
-      pokedex: 2,
       age: 1,
       hungry: 1,
       sleepy: 1,
@@ -26,7 +20,6 @@ const pets =
     },
     {
       name: "Venusaur",
-      pokedex: 3,
       age: 1,
       hungry: 1,
       sleepy: 1,
@@ -35,7 +28,6 @@ const pets =
     },
     {
       name: "Charmander",
-      pokedex: 4,
       age: 1,
       hungry: 1,
       sleepy: 1,
@@ -44,7 +36,6 @@ const pets =
     },
     {
       name: "Charmeleon",
-      pokedex: 5,
       age: 1,
       hungry: 1,
       sleepy: 1,
@@ -53,7 +44,6 @@ const pets =
     },
     {
       name: "Charizard",
-      pokedex: 6,
       age: 1,
       hungry: 1,
       sleepy: 1,
@@ -62,7 +52,6 @@ const pets =
     },
     {
       name: "Squirtle",
-      pokedex: 7,
       age: 1,
       hungry: 1,
       sleepy: 1,
@@ -71,7 +60,6 @@ const pets =
     },
     {
       name: "Wartortle",
-      pokedex: 8,
       age: 1,
       hungry: 1,
       sleepy: 1,
@@ -80,7 +68,6 @@ const pets =
     },
     {
       name: "Blastoise",
-      pokedex: 9,
       age: 1,
       hungry: 1,
       sleepy: 1,
@@ -89,18 +76,22 @@ const pets =
     },
   ];
 
+const logo = "http://4.bp.blogspot.com/-oH465XaJjpY/T8yZVJsteTI/AAAAAAAAADs/LwFrlgaVVv0/s1600/dog_paw_print_black.png"
+
+const egg = "https://www.pinclipart.com/picdir/big/89-892298_pokemon-egg-pokemon-go-egg-png-clipart.png"
+
 let currentPet =
 {
-  name: "Charmander",
-  pokedex: 0,
-  age: 1,
-  hungry: 2,
-  sleepy: 2,
-  bored: 2,
-  image: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png"
+  name: "",
+  age: 0,
+  hungry: 0,
+  sleepy: 0,
+  bored: 0,
+  image: "",
+  isAlive: false
 };
 
-let isAlive = true;
+let isAlive = false;
 
 let intervalId;
 
@@ -111,8 +102,6 @@ const $feed = $(".interact__feed");
 const $sleep = $(".interact__sleep");
 const $play = $(".interact__play");
 const $active = $(".button__active");
-
-
 
 /* === Functions === */
 
@@ -132,23 +121,42 @@ function agePet()
   $(".info__age").text(`Age: ${currentPet.age}`);
 }
 
+function updatePet()
+{
+  ageInterval;
+
+  $image.attr("src", currentPet.image);
+  $(".info__name").text(`Name: ${currentPet.name}`);
+  $(".info__age").text(`Age: ${currentPet.age}`)
+  $(".stat__hungry").text(currentPet.hungry);
+  $(".stat__sleepy").text(currentPet.sleepy);
+  $(".stat__bored").text(currentPet.bored);
+}
+
+function generateNewPet()
+{
+  const index = Math.floor(Math.random() * 3) * 3;
+  currentPet = pets[index];
+  updatePet();
+}
+
 /* === Event Functions === */
 
-const checkState = function ()
+const checkPet = function ()
 {
-  if ($image.attr("src") === logo)
+  if (currentPet.isAlive === false)
   {
-    $image.attr("src", currentPet.image);
-    $(".info__name").text(`Name: ${currentPet.name}`);
-    $(".info__age").text(`Age: ${currentPet.age}`)
-    $(".stat__hungry").text(currentPet.hungry);
-    $(".stat__sleepy").text(currentPet.sleepy);
-    $(".stat__bored").text(currentPet.bored);
+    $image.attr("src", egg);
+
+    // the arrow function is required to delay the invokation of updatePet
+    setTimeout(() => (generateNewPet()), 3000);
   }
   else
   {
-    $image.attr("src", logo);
+    updatePet();
   }
+
+
 }
 
 const feedPet = function ()
@@ -212,9 +220,9 @@ const ageInterval = function ()
 
 /* === Event Listeners === */
 
-$active.on("click", checkState);
+$active.on("click", checkPet);
 
-$active.on("click", ageInterval);
+// $active.on("click", ageInterval);
 
 $feed.on("click", feedPet);
 
@@ -225,3 +233,4 @@ $play.on("click", playPet);
 /* === Invoked Functions === */
 
 $image.attr("src", logo);
+
