@@ -153,6 +153,11 @@ function generateNewPet()
   updatePet();
 }
 
+const increaseStat = function ()
+{
+
+}
+
 /* === Event Functions === */
 
 const checkPet = function ()

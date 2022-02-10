@@ -31,6 +31,11 @@ div
   background-color: var(--primary);
 }
 
+.tamagotchi h1
+{
+  color: var(--text);
+}
+
 .display__pet
 {
   height: 300px;
@@ -83,15 +88,17 @@ img
 
 .buttons__interact button
 {
-  padding: 15px 15px;
+  padding: 10px 15px;
   border-radius: 100%;
+  color: var(--text);
   background-color: var(--secondary);
 }
 
 .button__active
 {
-  padding: 15px 30px;
+  padding: 15px 15px;
   align-self: center;
   border-radius: 100%;
+  color: var(--text);
   background-color: var(--secondary)
 }
