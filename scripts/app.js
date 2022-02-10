@@ -76,9 +76,11 @@ const pets =
     },
   ];
 
-const logo = "http://4.bp.blogspot.com/-oH465XaJjpY/T8yZVJsteTI/AAAAAAAAADs/LwFrlgaVVv0/s1600/dog_paw_print_black.png"
+const logo = "http://4.bp.blogspot.com/-oH465XaJjpY/T8yZVJsteTI/AAAAAAAAADs/LwFrlgaVVv0/s1600/dog_paw_print_black.png";
 
-const egg = "https://www.pinclipart.com/picdir/big/89-892298_pokemon-egg-pokemon-go-egg-png-clipart.png"
+const egg = "https://www.pinclipart.com/picdir/big/89-892298_pokemon-egg-pokemon-go-egg-png-clipart.png";
+
+const grave = "https://tinyimg.io/i/rxVYoCD.png";
 
 let currentPet =
 {
@@ -134,14 +136,14 @@ const ageInterval = function ()
   }
 }
 
-function increaseStats()
+const increaseStats = function ()
 {
-  if (Math.random() > 0.7)
+  if (Math.random() < 0.7)
   {
     currentPet.hungry += 1;
   }
 
-  if (Math.random() > 0.7)
+  if (Math.random() < 0.7)
   {
     currentPet.sleepy += 1;
   }
@@ -152,24 +154,51 @@ function increaseStats()
   }
 }
 
-function increaseAge()
+const buryPet = function ()
 {
-  if (currentPet.age === 10)
+  $image.attr("src", grave);
+
+  if (currentPet.age === 15)
+  {
+    alert(`${currentPet.name} lived a happy life and died of old age`);
+  }
+  else if (currentPet.hungry === 10)
+  {
+    alert(`${currentPet.name} died from starvation!`);
+  }
+  else if (currentPet.sleepy === 10)
+  {
+    alert(`${currentPet.name} died from exhaustion!`);
+  }
+  else if (currentPet.bored === 10)
+  {
+    alert(`${currentPet.name} died from boredom!`);
+  }
+}
+
+const increaseAge = function ()
+{
+  if (currentPet.age === 15 ||
+    currentPet.hungry === 10 || currentPet.sleepy === 10 || currentPet.bored === 10)
   {
     clearInterval(intervalId);
 
     intervalId = null;
+
+    buryPet();
   }
   else
   {
     currentPet.age += 1;
     increaseStats();
+
+    updateDisplay();
   }
 
-  updateDisplay();
+  // updateDisplay();
 }
 
-function generateNewPet()
+const generateNewPet = function ()
 {
   const index = Math.floor(Math.random() * 3) * 3;
   currentPet = pets[index];
@@ -178,6 +207,8 @@ function generateNewPet()
   $image.attr("src", currentPet.image);
 
   setTimeout(() => (prompt("What would you like to name your new pet?", currentPet.name)), 500);
+
+  isAlive = true;
 
   updateDisplay();
 }
