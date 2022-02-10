@@ -87,8 +87,7 @@ let currentPet =
   hungry: 0,
   sleepy: 0,
   bored: 0,
-  image: "",
-  isAlive: false
+  image: ""
 };
 
 let isAlive = false;
@@ -115,7 +114,45 @@ const $active = $(".button__active");
 
 /* === Functions === */
 
-function agePet()
+const updateDisplay = function ()
+{
+  ageInterval();
+
+  $image.attr("src", currentPet.image);
+  $nameDisplay.text(`Name: ${currentPet.name}`);
+  $ageDisplay.text(`Age: ${currentPet.age}`)
+  $hungryDisplay.text(currentPet.hungry);
+  $sleepyDisplay.text(currentPet.sleepy);
+  $boredDisplay.text(currentPet.bored);
+}
+
+const ageInterval = function ()
+{
+  if (!intervalId)
+  {
+    intervalId = setInterval(increaseAge, 1000);
+  }
+}
+
+function increaseStats()
+{
+  if (Math.random() > 0.7)
+  {
+    currentPet.hungry += 1;
+  }
+
+  if (Math.random() > 0.7)
+  {
+    currentPet.sleepy += 1;
+  }
+
+  if (Math.random() < 0.7)
+  {
+    currentPet.bored += 1;
+  }
+}
+
+function increaseAge()
 {
   if (currentPet.age === 10)
   {
@@ -126,52 +163,39 @@ function agePet()
   else
   {
     currentPet.age += 1;
+    increaseStats();
   }
 
-  $(".info__age").text(`Age: ${currentPet.age}`);
-}
-
-function updatePet()
-{
-  ageInterval();
-
-  $image.attr("src", currentPet.image);
-  $(".info__name").text(`Name: ${currentPet.name}`);
-  $(".info__age").text(`Age: ${currentPet.age}`)
-  $(".stat__hungry").text(currentPet.hungry);
-  $(".stat__sleepy").text(currentPet.sleepy);
-  $(".stat__bored").text(currentPet.bored);
+  updateDisplay();
 }
 
 function generateNewPet()
 {
   const index = Math.floor(Math.random() * 3) * 3;
   currentPet = pets[index];
+
+  // let user see their pet before deciding to name it
   $image.attr("src", currentPet.image);
-  setTimeout(() => (prompt("What would like to name your new pet?", currentPet.name)), 500);
 
-  updatePet();
-}
+  setTimeout(() => (prompt("What would you like to name your new pet?", currentPet.name)), 500);
 
-const increaseStat = function ()
-{
-
+  updateDisplay();
 }
 
 /* === Event Functions === */
 
 const checkPet = function ()
 {
-  if (currentPet.isAlive === false)
+  if (isAlive === false)
   {
     $image.attr("src", egg);
 
-    // the arrow function is required to delay the invokation of updatePet
+    // the arrow function is required to delay the invokation of updateDisplay
     setTimeout(() => (generateNewPet()), 3000);
   }
   else
   {
-    updatePet();
+    updateDisplay();
   }
 }
 
@@ -189,7 +213,7 @@ const feedPet = function ()
     }
   }
 
-  $(".stat__hungry").text(currentPet.hungry)
+  $hungryDisplay.text(currentPet.hungry)
 }
 
 const sleepPet = function ()
@@ -206,7 +230,7 @@ const sleepPet = function ()
     }
   }
 
-  $(".stat__sleepy").text(currentPet.sleepy);
+  $sleepyDisplay.text(currentPet.sleepy);
 }
 
 const playPet = function ()
@@ -223,22 +247,14 @@ const playPet = function ()
     }
   }
 
-  $(".stat__bored").text(currentPet.bored);
+  $boredDisplay.text(currentPet.bored);
 }
 
-const ageInterval = function ()
-{
-  if (!intervalId)
-  {
-    intervalId = setInterval(agePet, 1000);
-  }
-}
+
 
 /* === Event Listeners === */
 
-$active.on("click", checkPet);
-
-// $active.on("click", ageInterval);
+$active.on("click", checkPet)
 
 $feed.on("click", feedPet);
 
