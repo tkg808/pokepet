@@ -61,6 +61,7 @@ img
   padding: 40px 10px 0 10px;
   object-fit: scale-down;
   object-position: center;
+  /* animation: evolving 1s infinite; */
 }
 
 .display__info
@@ -134,4 +135,15 @@ img
 button:hover
 {
   cursor: pointer;
+}
+
+@keyframes evolving
+{
+  0% {opacity: 25%;};
+  20% {opacity: 0%};
+  40% {opacity: 50%;};
+  60% {opacity: 0%};
+  70% {opacity: 75%};
+  85% {opacity: 0%};
+  100% {opacity: 100%};
 }

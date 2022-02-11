@@ -173,29 +173,41 @@ const evolvePet = function ()
 {
   if (currentPet.age === 20)
   {
-    currentPet.image = pets[index + 2].image;
 
-    if (currentPet.name === pets[index + 1].name)
+    // evolveAnimation(index + 1); // evolve animation here
+    $image.evolve(index + 1);
+
+    // makes pet changes after animation
+    setTimeout(() =>
     {
-      currentPet.name = pets[index + 2].name;
-    }
+      currentPet.image = pets[index + 2];
+      // $image.attr("src", pets[index + 2]);
 
-    alert(`Whoa! ${currentPet.name} is transforming!`);
+      if (currentPet.name === pets[index + 1].name)
+      {
+        currentPet.name = pets[index + 2].name;
+      }
+    }, 2000);
 
-    evolveAnimation(); // evolve animation here
+    alert(`Whoa! Your pet is transforming!`);
   }
   else if (currentPet.age === 10)
   {
-    currentPet.image = pets[index + 1].image;
+    $image.evolve(index);
 
-    if (currentPet.name === pets[index].name)
+    // makes pet changes after animation
+    setTimeout(() =>
     {
-      currentPet.name = pets[index + 1].name;
-    }
+      currentPet.image = pets[index + 1].image;
+      // $image.attr("src", pets[index + 1]);
 
-    alert(`Whoa! ${currentPet.name} is transforming!`);
+      if (currentPet.name === pets[index].name)
+      {
+        currentPet.name = pets[index + 1].name;
+      }
+    }, 2000);
 
-    evolveAnimation(); // evolve animation here
+    alert(`Whoa! Your pet is transforming!`)
   }
 }
 
@@ -392,18 +404,58 @@ $.fn.shake = function (interval = 100)
 }
 
 // alternate images of two pets with varying opacity until the evolved is fully visible
-const evolveAnimation = function () 
+// const evolveAnimation = function (currentIndex) 
+// {
+//   setTimeout(() => ($image.evolve(currentIndex)), 1000);
+// }
+
+$.fn.evolve = function (currentIndex, interval = 100)
 {
-  setTimeout(() => ($image.evolve()), 1000);
-}
+  // this.addClass('evolving');
 
-$.fn.evolve = function (interval = 100, currentIndex)
-{
-  this.addClass('evolving');
+  // this.css('transition', 'all ' + (interval / 50).toString() + 's');
 
-  this.css('transition', 'all ' + (interval / 50).toString() + 's');
+  setTimeout(() =>
+  {
+    $image.attr("src", pets[currentIndex + 1].image);
+    this.css("opacity", "25%");
+  }, interval * 0);
 
+  setTimeout(() =>
+  {
+    $image.attr("src", pets[currentIndex].image);
+    this.css("opacity", "100%");
+  }, interval * 5);
 
+  setTimeout(() =>
+  {
+    $image.attr("src", pets[currentIndex + 1].image);
+    this.css("opacity", "50%");
+  }, interval * 10);
+
+  setTimeout(() =>
+  {
+    $image.attr("src", pets[currentIndex].image);
+    this.css("opacity", "50%");
+  }, interval * 13);
+
+  setTimeout(() =>
+  {
+    $image.attr("src", pets[currentIndex + 1].image);
+    this.css("opacity", "75%");
+  }, interval * 16);
+
+  setTimeout(() =>
+  {
+    $image.attr("src", pets[currentIndex].image);
+    this.css("opacity", "25%");
+  }, interval * 18);
+
+  setTimeout(() =>
+  {
+    this.attr("src", pets[currentIndex + 1].image);
+    this.css("opacity", "100%");
+  }, interval * 20);
 
   // this.removeClass('evolving');
 }
