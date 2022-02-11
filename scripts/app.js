@@ -152,19 +152,20 @@ const updateDisplay = function ()
 // randomly increases a stat by one
 const increaseStats = function ()
 {
+
   if (Math.random() < 0.5)
   {
-    currentPet.hungry += 1;
+    currentPet.hungry += Math.ceil(Math.random() * 2);
   }
 
   if (Math.random() < 0.5)
   {
-    currentPet.sleepy += 1;
+    currentPet.sleepy += Math.ceil(Math.random() * 2);
   }
 
   if (Math.random() < 0.5)
   {
-    currentPet.bored += 1;
+    currentPet.bored += Math.ceil(Math.random() * 2);
   }
 }
 
@@ -200,7 +201,6 @@ const evolvePet = function ()
     setTimeout(() =>
     {
       currentPet.image = pets[index + 1].image;
-      // $image.attr("src", pets[index + 1]);
     }, 2000);
 
     if (currentPet.name === pets[index].name)
