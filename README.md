@@ -1,4 +1,5 @@
-# tamagotchi
+### Tamagotchi
+- This project was designed with the classic Tamagotchi in mind mixed with some Pokemon/GBC influences.
 
 ### Wireframe
 
@@ -17,3 +18,10 @@
 - As a user, I want to see my pet's hunger, sleepiness, and boredom levels so I can keep track of when to interact with my pet.
 
 - As a user, I want to see my pet change over time to reward me for taking care of my pet.
+
+### Unsolved Problems
+- Spend more time on UI to make it resemble the Tamagotchi shape.
+- Fix the interval/display so pet info/stats updates smoothly.
+- Rework objects in pets array to have more useful properties.
+- Add an animation so an emoji floats upward and disappears when user interacts with pet.
+- Make percentChance a global variable to also be able to control how often a stat will increase.
