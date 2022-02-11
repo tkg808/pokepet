@@ -87,6 +87,11 @@ img
   border-top: none;
 }
 
+.display__info section, .display__stats section, .buttons button
+{
+  font-family: 'Akaya Telivigala';
+}
+
 .stat p
 {
   padding: 0 0 0 20px;
