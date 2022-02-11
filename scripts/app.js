@@ -92,13 +92,17 @@ let currentPet =
   image: "",
 };
 
+// picks starter pet and finding transformations in pets array
 let index = Math.floor(Math.random() * 3) * 3;
 
+// used to activate buttons and end the game
 let isAlive = false;
 
+// needed to stop the interval
 let intervalId;
 
-let increaseAmount = 1;
+// used to determine difficulty
+let statAmount = 1;
 
 /* === DOM Elements === */
 
@@ -151,32 +155,42 @@ const updateDisplay = function ()
   $boredDisplay.text(currentPet.bored);
 }
 
-// randomly increases a stat by one
+const increaseAmount = function ()
+{
+  if (currentPet.age % 10 === 0)
+  {
+    statAmount++;
+  }
+}
+
+// randomly increases a stat
 const increaseStats = function ()
 {
-  if (Math.random() < 0.5)
+  if (Math.random() < 0.6)
   {
-    currentPet.hungry += Math.ceil(Math.random() * increaseAmount);
+    currentPet.hungry += Math.ceil(Math.random() * statAmount);
   }
 
-  if (Math.random() < 0.5)
+  if (Math.random() < 0.6)
   {
-    currentPet.sleepy += Math.ceil(Math.random() * increaseAmount);
+    currentPet.sleepy += Math.ceil(Math.random() * statAmount);
   }
 
-  if (Math.random() < 0.5)
+  if (Math.random() < 0.6)
   {
-    currentPet.bored += Math.ceil(Math.random() * increaseAmount);
+    currentPet.bored += Math.ceil(Math.random() * statAmount);
   }
 }
 
 // transforms the pet at certain ages and changes it's name if necessary
 const evolvePet = function ()
 {
-  if (currentPet.age === 20)
+  if (currentPet.age === 30)
   {
+    // start animation
     $image.evolve(index + 1);
 
+    // decide if name needs to be changed
     if (currentPet.name === pets[index + 1].name)
     {
       currentPet.name = pets[index + 2].name;
@@ -185,19 +199,13 @@ const evolvePet = function ()
     alert(`Whoa! Your pet is transforming!`);
 
     increaseAmount++;
-
-    // makes pet changes after animation
-    setTimeout(() =>
-    {
-      currentPet.image = pets[index + 2];
-      // $image.attr("src", pets[index + 2]);
-
-    }, 2000);
   }
-  else if (currentPet.age === 10)
+  else if (currentPet.age === 15)
   {
+    // start animation
     $image.evolve(index);
 
+    // decide if name needs to be changed
     if (currentPet.name === pets[index].name)
     {
       currentPet.name = pets[index + 1].name;
@@ -205,13 +213,8 @@ const evolvePet = function ()
 
     alert(`Whoa! Your pet is transforming!`);
 
+    // increase difficulty
     increaseAmount++;
-
-    // makes pet changes after animation
-    setTimeout(() =>
-    {
-      currentPet.image = pets[index + 1].image;
-    }, 2000)
   }
 
   updateDisplay();
@@ -222,19 +225,19 @@ const buryPet = function ()
 {
   $image.attr("src", grave);
 
-  if (currentPet.age === 30)
+  if (currentPet.age === 60)
   {
     alert(`${currentPet.name} lived a happy life and died of old age`);
   }
-  else if (currentPet.hungry === 10)
+  else if (currentPet.hungry >= 10)
   {
     alert(`${currentPet.name} died from starvation!`);
   }
-  else if (currentPet.sleepy === 10)
+  else if (currentPet.sleepy >= 10)
   {
     alert(`${currentPet.name} died from exhaustion!`);
   }
-  else if (currentPet.bored === 10)
+  else if (currentPet.bored >= 10)
   {
     alert(`${currentPet.name} died from boredom!`);
   }
@@ -243,8 +246,8 @@ const buryPet = function ()
 // stops the interval if criteria is met, or continues to accrue age/stats
 const increaseAge = function ()
 {
-  if (currentPet.age === 30 ||
-    currentPet.hungry === 10 || currentPet.sleepy === 10 || currentPet.bored === 10)
+  if (currentPet.age === 60 ||
+    currentPet.hungry >= 10 || currentPet.sleepy >= 10 || currentPet.bored >= 10)
   {
     clearInterval(intervalId);
     intervalId = null;
@@ -256,6 +259,7 @@ const increaseAge = function ()
   {
     currentPet.age += 1;
 
+    increaseAmount();
     increaseStats();
     evolvePet();
 
@@ -373,6 +377,7 @@ const eggAnimation = function ()
   setTimeout(() => ($image.shake()), 3000);
 }
 
+// rapidly moves image from side to side
 $.fn.shake = function (interval = 100)
 {
   this.addClass('shaking');
@@ -412,7 +417,7 @@ $.fn.shake = function (interval = 100)
   this.removeClass('shaking');
 }
 
-// alternate images of two pets with varying opacity until the evolved is fully visible
+// alternates two images with varying opacity until the new image is set to currentPet
 $.fn.evolve = function (currentIndex, interval = 100)
 {
   setTimeout(() =>
@@ -425,37 +430,38 @@ $.fn.evolve = function (currentIndex, interval = 100)
   {
     $image.attr("src", pets[currentIndex].image);
     this.css("opacity", "100%");
-  }, interval * 5);
+  }, interval * 4);
 
   setTimeout(() =>
   {
     $image.attr("src", pets[currentIndex + 1].image);
+    this.css("opacity", "50%");
+  }, interval * 8);
+
+  setTimeout(() =>
+  {
+    $image.attr("src", pets[currentIndex].image);
     this.css("opacity", "50%");
   }, interval * 10);
 
   setTimeout(() =>
   {
-    $image.attr("src", pets[currentIndex].image);
-    this.css("opacity", "50%");
-  }, interval * 13);
-
-  setTimeout(() =>
-  {
     $image.attr("src", pets[currentIndex + 1].image);
     this.css("opacity", "75%");
-  }, interval * 16);
+  }, interval * 12);
 
   setTimeout(() =>
   {
     $image.attr("src", pets[currentIndex].image);
     this.css("opacity", "25%");
-  }, interval * 18);
+  }, interval * 14);
 
   setTimeout(() =>
   {
     this.attr("src", pets[currentIndex + 1].image);
     this.css("opacity", "100%");
-  }, interval * 20);
+    currentPet.image = pets[currentIndex + 1].image;
+  }, interval * 16);
 }
 
 const bouncePet = function ()
@@ -469,13 +475,12 @@ $.fn.bounce = function ()
   this.css("animation", "bounce");
   this.css("animation-duration", "1s");
 
-
   setTimeout(() =>
   {
     this.removeClass('animate__animated animate__bounce');
     this.css("animation", "");
     this.css("animation-duration", "");
-  }, 1000);
+  }, 800);
 }
 
 console.log(`😋`);
