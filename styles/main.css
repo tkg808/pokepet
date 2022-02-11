@@ -19,12 +19,14 @@ body
   display: flex;
   justify-content: center;
   background-color: #ffffff;
+  flex-grow: 0;
+  flex-shrink: 1;
 }
 
 div
 {
-  height: 500px;
-  width: 500px;
+  height: 600px;
+  width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,8 +40,8 @@ div
 
 .display__pet
 {
-  height: 300px;
-  width: 300px;
+  height: 350px;
+  width: 450px;
   background: var(--screen);
   /* border: 5px solid var(--accents); */
 }
@@ -48,7 +50,7 @@ img
 {
   width: 100%;
   height: 300px;
-  padding: 0 10px;
+  padding: 20px 10px 0 10px;
   object-fit: scale-down;
   object-position: center;
 }
@@ -72,7 +74,8 @@ img
 
 .buttons
 {
-  height: 100px;
+  width: 450px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -80,10 +83,10 @@ img
 
 .buttons__interact
 {
-  width: 300px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  padding: 15px 0;
 }
 
 .buttons__interact button
@@ -96,7 +99,7 @@ img
 
 .button__active
 {
-  padding: 15px 15px;
+  padding: 10px 25px;
   align-self: center;
   border-radius: 100%;
   color: var(--text);

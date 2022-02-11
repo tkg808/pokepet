@@ -72,7 +72,7 @@ const pets =
       hungry: 1,
       sleepy: 1,
       bored: 1,
-      image: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/009.png"
+      image: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/009.png",
     },
   ];
 
@@ -89,7 +89,7 @@ let currentPet =
   hungry: 0,
   sleepy: 0,
   bored: 0,
-  image: ""
+  image: "",
 };
 
 let index = Math.floor(Math.random() * 3) * 3;
@@ -118,18 +118,7 @@ const $active = $(".button__active");
 
 /* === Functions === */
 
-const updateDisplay = function ()
-{
-  ageInterval();
-
-  $image.attr("src", currentPet.image);
-  $nameDisplay.text(`Name: ${currentPet.name}`);
-  $ageDisplay.text(`Age: ${currentPet.age}`)
-  $hungryDisplay.text(currentPet.hungry);
-  $sleepyDisplay.text(currentPet.sleepy);
-  $boredDisplay.text(currentPet.bored);
-}
-
+// sets an interval if there isn't one already
 const ageInterval = function ()
 {
   if (!intervalId)
@@ -138,6 +127,29 @@ const ageInterval = function ()
   }
 }
 
+// gets a name for pet from user or uses default names
+const getName = function ()
+{
+  currentPet.name = prompt("What would you like to name your new pet?", pets[index].name);
+
+  if (currentPet.name === null)
+  {
+    currentPet.name = pets[index].name;
+  }
+}
+
+// updates the UI with current pet info/stats
+const updateDisplay = function ()
+{
+  $image.attr("src", currentPet.image);
+  $nameDisplay.text(`Name: ${currentPet.name}`);
+  $ageDisplay.text(`Age: ${currentPet.age}`)
+  $hungryDisplay.text(currentPet.hungry);
+  $sleepyDisplay.text(currentPet.sleepy);
+  $boredDisplay.text(currentPet.bored);
+}
+
+// randomly increases a stat by one
 const increaseStats = function ()
 {
   if (Math.random() < 0.5)
@@ -156,6 +168,7 @@ const increaseStats = function ()
   }
 }
 
+// transforms the pet at certain ages and changes it's name if necessary
 const evolvePet = function ()
 {
   if (currentPet.age >= 20)
@@ -178,6 +191,7 @@ const evolvePet = function ()
   }
 }
 
+// invokes when age reaches a specified number or if a stat reaches 10
 const buryPet = function ()
 {
   $image.attr("src", grave);
@@ -200,15 +214,16 @@ const buryPet = function ()
   }
 }
 
+// stops the interval if criteria is met, or continues to accrue age/stats
 const increaseAge = function ()
 {
   if (currentPet.age === 30 ||
     currentPet.hungry === 10 || currentPet.sleepy === 10 || currentPet.bored === 10)
   {
     clearInterval(intervalId);
-
     intervalId = null;
 
+    isAlive = false;
     buryPet();
   }
   else
@@ -224,17 +239,20 @@ const increaseAge = function ()
 
 const generateNewPet = function ()
 {
-  // const index = Math.floor(Math.random() * 3) * 3;
-  currentPet = pets[index];
+  // spread operator clones the object
+  currentPet = { ...pets[index] };
 
   // let user see their pet before deciding to name it
   $image.attr("src", currentPet.image);
 
-  setTimeout(() => (prompt("What would you like to name your new pet?", currentPet.name)), 500);
+  // asks user for pet's name after delay
+  setTimeout(() => (getName()), 500);
 
   isAlive = true;
 
   updateDisplay();
+
+  ageInterval();
 }
 
 /* === Event Functions === */
@@ -245,8 +263,10 @@ const checkPet = function ()
   {
     $image.attr("src", egg);
 
+    eggAnimations();
+
     // the arrow function is required to delay the invokation of updateDisplay
-    setTimeout(() => (generateNewPet()), 3000);
+    setTimeout(() => (generateNewPet()), 4000);
   }
   else
   {
@@ -256,7 +276,7 @@ const checkPet = function ()
 
 const feedPet = function ()
 {
-  if ($image.attr("src") !== logo)
+  if (isAlive === true)
   {
     if (currentPet.hungry === 1)
     {
@@ -273,7 +293,7 @@ const feedPet = function ()
 
 const sleepPet = function ()
 {
-  if ($image.attr("src") !== logo)
+  if (isAlive === true)
   {
     if (currentPet.sleepy === 1)
     {
@@ -290,7 +310,7 @@ const sleepPet = function ()
 
 const playPet = function ()
 {
-  if ($image.attr("src") !== logo)
+  if (isAlive === true)
   {
     if (currentPet.bored === 1)
     {
@@ -315,7 +335,54 @@ $sleep.on("click", sleepPet);
 
 $play.on("click", playPet);
 
+/* === Animation Functions === */
+
+const eggAnimations = function ()
+{
+  setTimeout(() => ($image.shake()), 1500);
+  setTimeout(() => ($image.shake()), 2500);
+  setTimeout(() => ($image.shake()), 3000);
+}
+
+$.fn.shake = function (interval = 100)
+{
+  this.addClass('shaking');
+
+  this.css('transition', 'all ' + (interval / 100).toString() + 's');
+
+  setTimeout(() =>
+  {
+    this.css('transform', 'translateX(-50%)');
+  }, interval * 0);
+
+  setTimeout(() =>
+  {
+    this.css('transform', 'translateX(50%)');
+  }, interval * 1);
+
+  setTimeout(() =>
+  {
+    this.css('transform', 'translateX(-25%)');
+  }, interval * 2);
+
+  setTimeout(() =>
+  {
+    this.css('transform', 'translateX(25%)');
+  }, interval * 3);
+
+  setTimeout(() =>
+  {
+    this.css('transform', 'translateX(-7%)');
+  }, interval * 4);
+
+  setTimeout(() =>
+  {
+    this.css('transform', 'translateX(0%)');
+  }, interval * 5);
+
+  this.removeClass('shaking');
+}
+
 /* === Invoked Functions === */
 
-$image.attr("src", logo);
-
+// $image.attr("src", logo);
