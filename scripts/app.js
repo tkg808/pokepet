@@ -171,7 +171,7 @@ const increaseStats = function ()
 // transforms the pet at certain ages and changes it's name if necessary
 const evolvePet = function ()
 {
-  if (currentPet.age >= 20)
+  if (currentPet.age === 20)
   {
     currentPet.image = pets[index + 2].image;
 
@@ -179,8 +179,10 @@ const evolvePet = function ()
     {
       currentPet.name = pets[index + 2].name;
     }
+
+    alert(`Whoa! ${currentPet.name} is transforming!`);
   }
-  else if (currentPet.age >= 10)
+  else if (currentPet.age === 10)
   {
     currentPet.image = pets[index + 1].image;
 
@@ -188,6 +190,8 @@ const evolvePet = function ()
     {
       currentPet.name = pets[index + 1].name;
     }
+
+    alert(`Whoa! ${currentPet.name} is transforming!`);
   }
 }
 
