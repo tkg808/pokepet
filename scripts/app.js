@@ -98,6 +98,8 @@ let isAlive = false;
 
 let intervalId;
 
+let increaseAmount = 1;
+
 /* === DOM Elements === */
 
 // pet info displays
@@ -152,20 +154,19 @@ const updateDisplay = function ()
 // randomly increases a stat by one
 const increaseStats = function ()
 {
-
   if (Math.random() < 0.5)
   {
-    currentPet.hungry += Math.ceil(Math.random() * 2);
+    currentPet.hungry += Math.ceil(Math.random() * increaseAmount);
   }
 
   if (Math.random() < 0.5)
   {
-    currentPet.sleepy += Math.ceil(Math.random() * 2);
+    currentPet.sleepy += Math.ceil(Math.random() * increaseAmount);
   }
 
   if (Math.random() < 0.5)
   {
-    currentPet.bored += Math.ceil(Math.random() * 2);
+    currentPet.bored += Math.ceil(Math.random() * increaseAmount);
   }
 }
 
@@ -174,9 +175,16 @@ const evolvePet = function ()
 {
   if (currentPet.age === 20)
   {
-
-    // evolveAnimation(index + 1); // evolve animation here
     $image.evolve(index + 1);
+
+    if (currentPet.name === pets[index + 1].name)
+    {
+      currentPet.name = pets[index + 2].name;
+    }
+
+    alert(`Whoa! Your pet is transforming!`);
+
+    increaseAmount++;
 
     // makes pet changes after animation
     setTimeout(() =>
@@ -185,30 +193,25 @@ const evolvePet = function ()
       // $image.attr("src", pets[index + 2]);
 
     }, 2000);
-
-    if (currentPet.name === pets[index + 1].name)
-    {
-      currentPet.name = pets[index + 2].name;
-    }
-
-    alert(`Whoa! Your pet is transforming!`);
   }
   else if (currentPet.age === 10)
   {
     $image.evolve(index);
-
-    // makes pet changes after animation
-    setTimeout(() =>
-    {
-      currentPet.image = pets[index + 1].image;
-    }, 2000);
 
     if (currentPet.name === pets[index].name)
     {
       currentPet.name = pets[index + 1].name;
     }
 
-    alert(`Whoa! Your pet is transforming!`)
+    alert(`Whoa! Your pet is transforming!`);
+
+    increaseAmount++;
+
+    // makes pet changes after animation
+    setTimeout(() =>
+    {
+      currentPet.image = pets[index + 1].image;
+    }, 2000)
   }
 
   updateDisplay();
