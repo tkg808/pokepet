@@ -462,15 +462,17 @@ const bouncePet = function ()
 
 $.fn.bounce = function ()
 {
-  this.addClass('animate__animated animate__bounce animate__infinite');
+  this.addClass('animate__animated animate__bounce');
   this.css("animation", "bounce");
   this.css("animation-duration", "1s");
-  this.removeClass('animate__animated animate__bounce animate__infinite');
 
-  // setTimeout(() =>
-  // {
-  //   this.addClass('animate__animated animate__bounce');
-  // }, 1000);
+
+  setTimeout(() =>
+  {
+    this.removeClass('animate__animated animate__bounce');
+    this.css("animation", "");
+    this.css("animation-duration", "");
+  }, 1000);
 }
 
 console.log(`😋`);
