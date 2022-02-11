@@ -181,6 +181,8 @@ const evolvePet = function ()
     }
 
     alert(`Whoa! ${currentPet.name} is transforming!`);
+
+    evolveAnimation(); // evolve animation here
   }
   else if (currentPet.age === 10)
   {
@@ -192,6 +194,8 @@ const evolvePet = function ()
     }
 
     alert(`Whoa! ${currentPet.name} is transforming!`);
+
+    evolveAnimation(); // evolve animation here
   }
 }
 
@@ -267,7 +271,7 @@ const checkPet = function ()
   {
     $image.attr("src", egg);
 
-    eggAnimations();
+    eggAnimation();
 
     // the arrow function is required to delay the invokation of updateDisplay
     setTimeout(() => (generateNewPet()), 4000);
@@ -341,7 +345,7 @@ $play.on("click", playPet);
 
 /* === Animation Functions === */
 
-const eggAnimations = function ()
+const eggAnimation = function ()
 {
   setTimeout(() => ($image.shake()), 1500);
   setTimeout(() => ($image.shake()), 2500);
@@ -387,6 +391,21 @@ $.fn.shake = function (interval = 100)
   this.removeClass('shaking');
 }
 
-/* === Invoked Functions === */
+// alternate images of two pets with varying opacity until the evolved is fully visible
+const evolveAnimation = function () 
+{
+  setTimeout(() => ($image.evolve()), 1000);
+}
 
-// $image.attr("src", logo);
+$.fn.evolve = function (interval = 100, currentIndex)
+{
+  this.addClass('evolving');
+
+  this.css('transition', 'all ' + (interval / 50).toString() + 's');
+
+
+
+  // this.removeClass('evolving');
+}
+
+console.log(`😋`);

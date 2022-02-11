@@ -7,9 +7,9 @@
 
 :root
 {
-  --primary: #03045E;
-  --secondary: #663399;
-  --accents: #023E8A;
+  --primary: #005F73;
+  --secondary: #023E8A;
+  --accents: #000000;
   --screen: #a4ac86;
   --text: #CAF0F8;
 }
@@ -31,25 +31,33 @@ div
   flex-direction: column;
   align-items: center;
   background-color: var(--primary);
+  flex-shrink: 0;
+  flex-grow: 1;
 }
 
 .tamagotchi h1
 {
+  padding: 15px 0;
   color: var(--text);
+  font-family: 'Liu Jian Mao Cao';
+  font-size: 48px;
 }
 
 .display__pet
 {
-  height: 350px;
+  height: 300px;
   width: 450px;
   background: var(--screen);
-  /* border: 5px solid var(--accents); */
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  border: 10px solid var(--accents);
+  border-bottom: none;
 }
 
 img
 {
   width: 100%;
-  height: 300px;
+  height: 250px;
   padding: 40px 10px 0 10px;
   object-fit: scale-down;
   object-position: center;
@@ -57,25 +65,37 @@ img
 
 .display__info
 {
+  padding: 5px 15px 10px 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: var(--screen);
+  border: 10px solid var(--accents);
+  border-top: none;
+  border-bottom: none;
 }
 
 .display__stats
 {
+  padding: 0 0 5px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  /* align-items: center; */
+  align-items: center;
   background-color: var(--screen);
+  border: 10px solid var(--accents);
+  border-top: none;
+}
+
+.stat p
+{
+  padding: 0 0 0 20px;
 }
 
 .buttons
 {
   width: 450px;
-  height: 150px;
+  height: 125px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
