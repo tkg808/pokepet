@@ -183,11 +183,12 @@ const evolvePet = function ()
       currentPet.image = pets[index + 2];
       // $image.attr("src", pets[index + 2]);
 
-      if (currentPet.name === pets[index + 1].name)
-      {
-        currentPet.name = pets[index + 2].name;
-      }
     }, 2000);
+
+    if (currentPet.name === pets[index + 1].name)
+    {
+      currentPet.name = pets[index + 2].name;
+    }
 
     alert(`Whoa! Your pet is transforming!`);
   }
@@ -200,15 +201,17 @@ const evolvePet = function ()
     {
       currentPet.image = pets[index + 1].image;
       // $image.attr("src", pets[index + 1]);
-
-      if (currentPet.name === pets[index].name)
-      {
-        currentPet.name = pets[index + 1].name;
-      }
     }, 2000);
+
+    if (currentPet.name === pets[index].name)
+    {
+      currentPet.name = pets[index + 1].name;
+    }
 
     alert(`Whoa! Your pet is transforming!`)
   }
+
+  updateDisplay();
 }
 
 // invokes when age reaches a specified number or if a stat reaches 10
@@ -305,6 +308,7 @@ const feedPet = function ()
     else
     {
       currentPet.hungry -= 1;
+      bouncePet();
     }
   }
 
@@ -322,6 +326,7 @@ const sleepPet = function ()
     else
     {
       currentPet.sleepy -= 1;
+      bouncePet();
     }
   }
 
@@ -339,6 +344,7 @@ const playPet = function ()
     else
     {
       currentPet.bored -= 1;
+      bouncePet();
     }
   }
 
@@ -404,17 +410,8 @@ $.fn.shake = function (interval = 100)
 }
 
 // alternate images of two pets with varying opacity until the evolved is fully visible
-// const evolveAnimation = function (currentIndex) 
-// {
-//   setTimeout(() => ($image.evolve(currentIndex)), 1000);
-// }
-
 $.fn.evolve = function (currentIndex, interval = 100)
 {
-  // this.addClass('evolving');
-
-  // this.css('transition', 'all ' + (interval / 50).toString() + 's');
-
   setTimeout(() =>
   {
     $image.attr("src", pets[currentIndex + 1].image);
@@ -456,8 +453,24 @@ $.fn.evolve = function (currentIndex, interval = 100)
     this.attr("src", pets[currentIndex + 1].image);
     this.css("opacity", "100%");
   }, interval * 20);
+}
 
-  // this.removeClass('evolving');
+const bouncePet = function ()
+{
+  $image.bounce();
+}
+
+$.fn.bounce = function ()
+{
+  this.addClass('animate__animated animate__bounce animate__infinite');
+  this.css("animation", "bounce");
+  this.css("animation-duration", "1s");
+  this.removeClass('animate__animated animate__bounce animate__infinite');
+
+  // setTimeout(() =>
+  // {
+  //   this.addClass('animate__animated animate__bounce');
+  // }, 1000);
 }
 
 console.log(`😋`);
