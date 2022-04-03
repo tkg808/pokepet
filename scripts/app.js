@@ -1,5 +1,4 @@
 /* === Variables === */
-
 const pets =
   [
     {
@@ -93,7 +92,7 @@ let currentPet =
 };
 
 // picks starter pet and finding transformations in pets array
-let index = Math.floor(Math.random() * 3) * 3;
+let index;
 
 // used to activate buttons and end the game
 let isAlive = false;
@@ -102,7 +101,7 @@ let isAlive = false;
 let intervalId;
 
 // used to determine difficulty
-let statAmount = 1;
+let statAmount;
 
 /* === DOM Elements === */
 
@@ -157,7 +156,7 @@ const updateDisplay = function ()
 
 const increaseAmount = function ()
 {
-  if (currentPet.age % 10 === 0)
+  if (currentPet.age % 15 === 0)
   {
     statAmount++;
   }
@@ -225,7 +224,7 @@ const buryPet = function ()
 {
   $image.attr("src", grave);
 
-  if (currentPet.age === 60)
+  if (currentPet.age === 50)
   {
     alert(`${currentPet.name} lived a happy life and died of old age`);
   }
@@ -246,7 +245,7 @@ const buryPet = function ()
 // stops the interval if criteria is met, or continues to accrue age/stats
 const increaseAge = function ()
 {
-  if (currentPet.age === 60 ||
+  if (currentPet.age === 50 ||
     currentPet.hungry >= 10 || currentPet.sleepy >= 10 || currentPet.bored >= 10)
   {
     clearInterval(intervalId);
@@ -269,6 +268,12 @@ const increaseAge = function ()
 
 const generateNewPet = function ()
 {
+  // Enables consecutive playing.
+  index = Math.floor(Math.random() * 3) * 3;
+
+  // Refreshes statAmount to enable consecutive playing.
+  statAmount = 1;
+
   // spread operator clones the object
   currentPet = { ...pets[index] };
 
@@ -289,7 +294,7 @@ const generateNewPet = function ()
 
 const checkPet = function ()
 {
-  if (isAlive === false)
+  if (!isAlive)
   {
     $image.attr("src", egg);
 
@@ -306,7 +311,7 @@ const checkPet = function ()
 
 const feedPet = function ()
 {
-  if (isAlive === true)
+  if (isAlive)
   {
     if (currentPet.hungry === 1)
     {
@@ -324,7 +329,7 @@ const feedPet = function ()
 
 const sleepPet = function ()
 {
-  if (isAlive === true)
+  if (isAlive)
   {
     if (currentPet.sleepy === 1)
     {
@@ -342,7 +347,7 @@ const sleepPet = function ()
 
 const playPet = function ()
 {
-  if (isAlive === true)
+  if (isAlive)
   {
     if (currentPet.bored === 1)
     {
@@ -482,5 +487,3 @@ $.fn.bounce = function ()
     this.css("animation-duration", "");
   }, 800);
 }
-
-console.log(`😋`);
