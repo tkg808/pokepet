@@ -75,7 +75,7 @@ const pets =
     },
   ];
 
-const logo = "http://4.bp.blogspot.com/-oH465XaJjpY/T8yZVJsteTI/AAAAAAAAADs/LwFrlgaVVv0/s1600/dog_paw_print_black.png";
+const logo = "https://4.bp.blogspot.com/-oH465XaJjpY/T8yZVJsteTI/AAAAAAAAADs/LwFrlgaVVv0/s1600/dog_paw_print_black.png";
 
 const egg = "https://tinyimg.io/i/HEI8mKt.png";
 
