@@ -4,8 +4,11 @@ This app was designed with the classic Tamagotchi in mind mixed with some Pokemo
 
 ## App Screenshots
 
-![Start-scree](https://tinyimg.io/i/xmBp0G1.png)
-![Play-screen](https://tinyimg.io/i/GSUQCbS.png)
+* Start-screen
+![Start-scree](https://tinyimg.io/i/IcedbI8.png)
+
+* In-game
+![Play-screen](https://tinyimg.io/i/3TdqVAJ.png)
 
 ## Technologies Used
 
