@@ -18,20 +18,19 @@ body
 {
   display: flex;
   justify-content: center;
-  background-color: #ffffff;
-  flex-grow: 0;
+  background-color: var(--primary);
+  flex-grow: 1;
   flex-shrink: 1;
 }
 
 div
 {
-  height: 600px;
-  width: 600px;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: var(--primary);
-  flex-shrink: 0;
+  flex-shrink: 1;
   flex-grow: 1;
 }
 
@@ -40,7 +39,7 @@ div
   padding: 15px 0;
   color: var(--text);
   font-family: 'Liu Jian Mao Cao';
-  font-size: 48px;
+  font-size: 3em;
 }
 
 .display__pet
@@ -51,7 +50,7 @@ div
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
   border: 10px solid var(--accents);
-  border-bottom: none;
+  border-bottom: 5px solid var(--accents);
 }
 
 img
@@ -61,7 +60,6 @@ img
   padding: 40px 10px 0 10px;
   object-fit: scale-down;
   object-position: center;
-  /* animation: evolving 1s infinite; */
 }
 
 .display__info
