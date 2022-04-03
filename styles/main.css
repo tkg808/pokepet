@@ -7,14 +7,168 @@
 
 :root
 {
-  --primary: #005F73;
-  --secondary: #023E8A;
-  --accents: #000000;
-  --screen: #a4ac86;
-  --text: #CAF0F8;
+  --primary: #005f73;
+  --secondary: #e9d8a6;
+  --accents: #751400;
+  --screen: #e0faff;
+  --text: #e0faff;
 }
 
 body
+{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary);
+}
+
+div.tamagotchi-container
+{
+  max-width: 750px;
+  min-width: 350px;
+  height: 90vh;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary);
+  border-radius: 50%;
+  border: 5px solid var(--accents);
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+h1
+{
+  padding: 15px 0;
+  color: var(--text);
+  font-family: 'Liu Jian Mao Cao';
+  font-size: 3em;
+}
+
+div.display
+{
+  width: 60%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  background: var(--screen);
+  border: 3px solid var(--accents);
+  border-radius: 5px;
+}
+
+img.pet-image
+{
+  width: 65%;
+  object-fit: scale-down;
+}
+
+div.pet-info
+{
+  width: 100%;
+  padding: 0.5em 1em 1em 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+div.pet-stats
+{
+  width: 100%;
+  padding: 0 10px;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+div.stat
+{
+  width: 20%;
+  display: flex;
+  padding: 10px 0;
+  flex-direction: column;
+  gap: 1em;
+}
+
+p
+{
+  font-family: 'Akaya Telivigala';
+  font-size: 1.2em;
+}
+
+div.buttons-container
+{
+  width: 60%;
+  padding-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+div.interactions
+{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+button
+{
+  width: 20%;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  color: var(--text);
+  background-color: var(--accents);
+  font-family: 'Akaya Telivigala';
+  font-size: 1em;
+}
+
+/* .buttons
+{
+  width: 450px;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.buttons__interact
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 15px 0;
+}
+
+.buttons__interact button
+{
+  padding: 10px 15px;
+  border-radius: 100%;
+  color: var(--text);
+  background-color: var(--secondary);
+}
+
+.button__active
+{
+  padding: 10px 25px;
+  align-self: center;
+  border-radius: 100%;
+  color: var(--text);
+  background-color: var(--secondary)
+}
+
+button:hover
+{
+  cursor: pointer;
+} */
+
+/* body
 {
   display: flex;
   justify-content: center;
@@ -94,43 +248,5 @@ img
 .stat p
 {
   padding: 0 0 0 20px;
-}
+} */
 
-.buttons
-{
-  width: 450px;
-  height: 125px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.buttons__interact
-{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 15px 0;
-}
-
-.buttons__interact button
-{
-  padding: 10px 15px;
-  border-radius: 100%;
-  color: var(--text);
-  background-color: var(--secondary);
-}
-
-.button__active
-{
-  padding: 10px 25px;
-  align-self: center;
-  border-radius: 100%;
-  color: var(--text);
-  background-color: var(--secondary)
-}
-
-button:hover
-{
-  cursor: pointer;
-}

@@ -77,7 +77,7 @@ const pets =
 
 const logo = "http://4.bp.blogspot.com/-oH465XaJjpY/T8yZVJsteTI/AAAAAAAAADs/LwFrlgaVVv0/s1600/dog_paw_print_black.png";
 
-const egg = "https://www.pinclipart.com/picdir/big/89-892298_pokemon-egg-pokemon-go-egg-png-clipart.png";
+const egg = "https://tinyimg.io/i/HEI8mKt.png";
 
 const grave = "https://tinyimg.io/i/rxVYoCD.png";
 
@@ -106,20 +106,20 @@ let statAmount;
 /* === DOM Elements === */
 
 // pet info displays
-const $image = $(".pet__image");
-const $nameDisplay = $(".info__name");
-const $ageDisplay = $(".info__age");
+const $image = $(".pet-image");
+const $nameDisplay = $(".pet-name");
+const $ageDisplay = $(".pet-age");
 
 // stat displays
-const $hungryDisplay = $(".stat__hungry");
-const $sleepyDisplay = $(".stat__sleepy");
-const $boredDisplay = $(".stat__bored");
+const $hungryDisplay = $(".stat-hungry");
+const $sleepyDisplay = $(".stat-sleepy");
+const $boredDisplay = $(".stat-bored");
 
 // buttons
-const $feed = $(".interact__feed");
-const $sleep = $(".interact__sleep");
-const $play = $(".interact__play");
-const $active = $(".button__active");
+const $feed = $(".interact-feed");
+const $sleep = $(".interact-sleep");
+const $play = $(".interact-play");
+const $active = $(".button-start");
 
 /* === Functions === */
 
@@ -322,9 +322,9 @@ const feedPet = function ()
       currentPet.hungry -= 1;
       bouncePet();
     }
-  }
 
-  updateDisplay();
+    updateDisplay();
+  }
 }
 
 const sleepPet = function ()
@@ -340,9 +340,9 @@ const sleepPet = function ()
       currentPet.sleepy -= 1;
       bouncePet();
     }
-  }
 
-  updateDisplay();
+    updateDisplay();
+  }
 }
 
 const playPet = function ()
@@ -358,9 +358,9 @@ const playPet = function ()
       currentPet.bored -= 1;
       bouncePet();
     }
-  }
 
-  updateDisplay();
+    updateDisplay();
+  }
 }
 
 /* === Event Listeners === */
