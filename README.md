@@ -5,10 +5,10 @@ This app is a fusion of the classic Tamagotchi and GBC Pokemon. You can interact
 ## App Screenshots
 
 * Start-screen
-![Start-scree](https://tinyimg.io/i/IcedbI8.png)
+![Start-scree](https://tinyimg.io/i/RsE9t4O.png)
 
 * In-game
-![Play-screen](https://tinyimg.io/i/3TdqVAJ.png)
+![Play-screen](https://tinyimg.io/i/RzEdHob.png)
 
 ## Technologies Used
 
