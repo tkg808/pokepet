@@ -1,4 +1,4 @@
-# Tamagotchi
+# PokePet
 
 This app is a fusion of the classic Tamagotchi and GBC Pokemon. You can interact with and  nurture one of the original starter Pokemon to raise it and watch it grow.
 
