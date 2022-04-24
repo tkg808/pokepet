@@ -423,7 +423,7 @@ $.fn.shake = function (interval = 100)
 }
 
 // alternates two images with varying opacity until the new image is set to currentPet
-$.fn.evolve = function (currentIndex, interval = 100)
+$.fn.evolve = function (currentIndex, interval = 200)
 {
   setTimeout(() =>
   {
