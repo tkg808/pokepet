@@ -1,6 +1,6 @@
 # Tamagotchi
 
-This app was designed with the classic Tamagotchi in mind mixed with some Pokemon/GBC influences.
+This app is a fusion of the classic Tamagotchi and GBC Pokemon. You can interact with and  nurture one of the original starter Pokemon to raise it and watch it grow.
 
 ## App Screenshots
 
